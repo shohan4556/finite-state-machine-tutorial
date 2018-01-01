@@ -14,7 +14,9 @@ public class ZombieAI : MonoBehaviour {
 
 	private float agentSpeed;	
 	private Animator animator;
-	private NavMeshAgent agent;
+	
+	[HideInInspector]
+	public NavMeshAgent agent;
 
 
 	// Use this for initialization
@@ -32,6 +34,8 @@ public class ZombieAI : MonoBehaviour {
 	void Update () {
 		isSeenPlayer = eyeSight();
 		
+		animator.SetBool("seenPlayer", isSeenPlayer);
+
 		if(agent.desiredVelocity.magnitude > Mathf.Epsilon){
 			//Vector3 localRot = transform.InverseTransformDirection(agent.desiredVelocity);
 			Quaternion lookRot = Quaternion.LookRotation(agent.desiredVelocity, Vector3.up);
