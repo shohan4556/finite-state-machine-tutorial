@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Attack : StateMachineBehaviour {
 
+	private Transform target;
+
+
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	
+		target = animator.gameObject.GetComponent<ZombieAI>().target;
+		NavMeshAgent agent = animator.gameObject.GetComponent<NavMeshAgent>();
+		agent.ResetPath();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	
+		animator.gameObject.transform.LookAt(target.position);	
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

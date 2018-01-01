@@ -22,7 +22,8 @@ public class Patrol : StateMachineBehaviour {
 
 		zombieAI = animator.gameObject.GetComponent<ZombieAI>();
 		agent = animator.gameObject.GetComponent<NavMeshAgent>();
-		currentWP = 0;
+		//agent.ResetPath();
+		//currentWP = 0;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -14,10 +14,10 @@ public class ZombieAI : MonoBehaviour {
 
 	private float agentSpeed;	
 	private Animator animator;
-	
+
 	[HideInInspector]
 	public NavMeshAgent agent;
-
+	public float Range = 100f;
 
 	// Use this for initialization
 	void Start () {
@@ -33,8 +33,10 @@ public class ZombieAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		isSeenPlayer = eyeSight();
-		
+		isInRange = inRange();
+
 		animator.SetBool("seenPlayer", isSeenPlayer);
+		animator.SetFloat("range",Range);
 
 		if(agent.desiredVelocity.magnitude > Mathf.Epsilon){
 			//Vector3 localRot = transform.InverseTransformDirection(agent.desiredVelocity);
@@ -67,7 +69,11 @@ public class ZombieAI : MonoBehaviour {
 	}
 
 	public bool inRange(){
-		return false;	
+		Range = Vector3.Distance(transform.position, target.position);
+		if(Range >= 5f){
+			return false;
+		}
+		return true;	
 	}
 
 	
